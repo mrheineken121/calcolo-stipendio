@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calcolo Stipendio Netto 2025</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'calcolo_stipendio/css/stipendio.css' %}">
+</head>
+<body>
+<div class="container">
+<h2>Calcolo Stipendio Netto (14 mensilità)</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Calcola</button>
+</form>
+{% if result %}
+    <h3>Risultato</h3>
+    <p><b>Netto annuo:</b> {{ result.netto_annuo }} €</p>
+    <p><b>Netto mensile (14):</b> {{ result.netto_mensile }} €</p>
+    <h3>Dettaglio</h3>
+    <p><b>Contributi INPS:</b> {{ result.contributi_inps }} €</p>
+    <p><b>Imponibile IRPEF:</b> {{ result.imponibile_irpef }} €</p>
+    <p><b>IRPEF lorda:</b> {{ result.irpef_lorda }} €</p>
+    <p><b>Detrazioni:</b> {{ result.detrazioni }} €</p>
+    <p><b>IRPEF netta:</b> {{ result.irpef_netta }} €</p>
+    <p><b>Cuneo fiscale 2025:</b> {{ result.cuneo_2025 }} €</p>
+    <p><b>Addizionale regionale:</b> {{ result.add_regionale }} €</p>
+    <p><b>Addizionale comunale:</b> {{ result.add_comunale }} €</p>
+    <p><b>Totale addizionali:</b> {{ result.totale_addizionali }} €</p>
+{% endif %}
+</div>
+</body>
+</html>
